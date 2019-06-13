@@ -1,0 +1,30 @@
+/dts-v1/;
+
+#include "RG4100.dtsi"
+
+/ {
+	compatible = "zt,rg4100", "mediatek,mt7628an-soc";
+	model = "RG4100";
+
+	aliases {
+		led-status = &led_indicator;
+	};
+
+	gpio-leds {
+		compatible = "gpio-leds";
+
+		led_indicator: indicator {
+			label = "rg4100:red:indicator";
+			gpios = <&gpio1 12 GPIO_ACTIVE_LOW>;
+		};
+	};
+};
+
+&pinctrl {
+	state_default: pinctrl0 {
+		gpio {
+			ralink,group = "i2c","spis","refclk","wdt","gpio","wled_an";
+			ralink,function = "gpio";
+		};
+	};
+};
